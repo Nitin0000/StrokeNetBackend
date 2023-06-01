@@ -3,31 +3,37 @@ const jwt = require("jsonwebtoken");
 
 const userSchema = Schema(
   {
-    email: {
+    firstName: {
       type: String,
       required: true,
+    },
+    lastName: {
+      type: String,
+      require: true,
+    },
+    emailAddress: {
+      type: String,
+      require: true,
+    },
+    mobileNumber: {
+      type: Number,
+      require: true,
     },
     password: {
       type: String,
       require: true,
     },
-    name: {
+    centerId: {
       type: String,
+      require: true,
     },
-    sid: {
+    userDepartment: {
       type: String,
+      require: true,
     },
-    roomSize: {
-      type: Number,
-    },
-    hostel: {
+    userRole: {
       type: String,
-    },
-    block: {
-      type: String,
-    },
-    roomNumber: {
-      type: Number,
+      require: true,
     },
   },
   { timestamps: true }
@@ -37,12 +43,7 @@ userSchema.methods.generateJWT = function () {
   const token = jwt.sign(
     {
       _id: this.id,
-      email: this.email,
-      name: this.name,
-      roomNumber:this.roomNumber,
-      block:this.block,
-      sid:this.sid,
-      hostel:this.hostel,
+
     },
     process.env.JWT_SECRET_KEY,
     { expiresIn: "1d" }
